@@ -14,10 +14,10 @@ class MenuItem
   {
     $tpl = array();
     
-    $tpl['TEXT'] = $this->text;
     $tpl['TAG'] = $this->tag;
+    $tpl['TEXT'] = $this->text;
 
-    return $tpl;
+    return PHPWS_Template::process($tpl, 'othermenu', 'menuitem.tpl');
   }
 
   public function getText(){

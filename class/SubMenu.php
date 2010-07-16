@@ -92,7 +92,8 @@ class SubMenu extends MenuItem implements arrayaccess
     foreach($this->container as $item){
       $tpl['menu_items'][] = array('CONTENT' => $item->show());
     }
-    return $tpl;
+
+    return PHPWS_Template::process($tpl, 'othermenu', 'submenu.tpl');
   }
 
   public function toString()

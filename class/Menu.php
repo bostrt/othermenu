@@ -12,7 +12,6 @@ PHPWS_Core::initModClass('othermenu', 'SubMenu.php');
 
 class Menu extends SubMenu
 {
-
   public function addMenuItem($text, $tag=null, $parentTag=null)
   {
     // find the menu they want to add an item to
@@ -59,7 +58,7 @@ class Menu extends SubMenu
       $tpl['menu_items'][] = array('CONTENT' => $item->show());
     }
     
-    return $tpl;
+    return PHPWS_Template::process($tpl, 'othermenu', 'menu.tpl');
   }
 }
 

@@ -8,7 +8,7 @@ $version     = '0.0.1';
 $register    = FALSE;
 $unregister  = FALSE;
 $import_sql  = FALSE;
-$about       = FALSE;
+$about       = TRUE;
 $priority    = 10;
 $dependecy   = FALSE;
 ?>
