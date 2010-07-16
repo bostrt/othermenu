@@ -1,0 +1,38 @@
+MenuItem
+--------------------
+A MenuItem will pass an array to PHPWS_Template::process 
+similar to this:
+
+Array {
+      TAG  => 'menu_item';
+      TEXT => 'This here is a menu item';
+}
+
+SubMenu
+-------------------
+A SubMenu will pass an array to PHPWS_Template::process
+similar to this:
+
+Array {
+      MENU_TAG   => 'submenu';
+      MENU_TEXT  => 'Settings and Configuration';
+      
+      menu_items => {
+			---More submenus or menuitems---
+      		    }
+      		 
+}
+
+Menu
+------------------
+The top level menu will pass an arry to PHPWS_Template::process
+similar to this:
+
+Array {
+      TOP_MENU_TAG   => 'top_menu';
+      TOP_MENU_TEXT  => 'Main Menu';
+
+      menu_items => {
+			---More submenus or menuitems---
+      		    }
+}
