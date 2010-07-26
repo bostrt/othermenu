@@ -1,7 +1,9 @@
-<u><h4>{TOP_MENU_TEXT}</h4></u>
+<fieldset>
+<legend>
+{TOP_MENU_TEXT}
+</legend>
 
-<ul>
 <!-- BEGIN menu_items -->
 {CONTENT}
 <!-- END menu_items -->
-</ul>
+</fieldset>
