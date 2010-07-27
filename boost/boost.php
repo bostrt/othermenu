@@ -4,7 +4,7 @@
  */
 
 $proper_name = 'Other Menu';
-$version     = '0.0.1';
+$version     = '0.0.4';
 $register    = FALSE;
 $unregister  = FALSE;
 $import_sql  = FALSE;
