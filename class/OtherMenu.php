@@ -58,7 +58,6 @@ class OtherMenu extends SubMenu
       $tpl['menu_items'][] = array('CONTENT' => $item->show());
     }
     
-    Layout::addStyle('othermenu', 'css/othermenu.css');
     return PHPWS_Template::process($tpl, 'othermenu', 'menu.tpl');
   }
 }
