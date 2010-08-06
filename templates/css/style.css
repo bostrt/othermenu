@@ -2,3 +2,17 @@
     float: left;
     margin-bottom: 10px;
 }
+
+.menu-title {
+    background-color: #DDDDDD;
+    display: block;
+    margin-left: -9px;
+    margin-right: -9px;
+    margin-top: -4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.top-menu {
+    margin-bottom: 5px;
+}
