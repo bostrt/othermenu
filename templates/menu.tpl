@@ -1,8 +1,8 @@
 <fieldset class="top-menu">
 
-<span class="menu-title">
+<legend class="menu-title">
 {TOP_MENU_TEXT}
-</span>
+</legend>
 
 <span id={TOP_MENU_TAG}>
 <!-- BEGIN menu_items -->

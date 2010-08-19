@@ -1,3 +1,3 @@
-<li id={TAG} class="menu-item">
+<li id={TAG} class="view-link">
 {TEXT}
 </li>
