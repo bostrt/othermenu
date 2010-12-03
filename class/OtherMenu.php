@@ -1,65 +1,90 @@
 <?php
-
 /**
- * Menu
  *
- * This represents the top level menu.
- *
- * @author Robert Bost <bostrt at gmail dot com>
+ * OtherMenu is an abstraction upon the composite and leaf.
+ * It can be used to generate whole menu.
+ * 
+ * @author Robert Bost <bostrt at tux dot appstate dot edu>
  */
 
-PHPWS_Core::initModClass('othermenu', 'SubMenu.php');
+require_once('MenuComposite.php');
+require_once('MenuItem.php');
 
-class OtherMenu extends SubMenu
+class OtherMenu extends MenuComposite
 {
-  public function addMenuItem($text, $tag=null, $parentTag=null)
-  {
-    // find the menu they want to add an item to
-    $menu = $this->getMenuByTag($parentTag);
-    
-    // If tag isn't given then make one for them
-    if(is_null($tag)){
-      $tag = $menu->getTag() . '-item-' . $menu->getMenuItemCount();
+    private $menuCount = 0;
+    private $itemCount = 0;
+
+    public function addMenu($text, $tag=null, $parentTag=null)
+    {
+        if(is_null($tag)){
+            // Generate tag.
+            $tag = 'menu-'.$this->menuCount;
+        }
+        if(is_null($parentTag)){
+            // $this is parent by default.
+            $parentTag = $this->tag;
+        }
+
+        // Get parent
+        $parent = $this->get($parentTag);
+
+        // Tags must be unique within parent
+        if($parent->has($tag)){
+            throw new Exception('Tags must be unique within parent. Parent: '.$parentTag.', Tag: '.$tag);
+        }
+
+        if(is_null($parent)){
+            throw new Exception('Cannot add menu to non-existent parent '.
+                                $parentTag);
+        }
+
+        // Create the new menu
+        $m = new MenuComposite($text, $tag);
+        $parent->add($m);
+
+        $this->menuCount++;
     }
 
-    // Create the item
-    $item = new MenuItem($text, $tag);
-    
-    $menu[$tag] = $item;
-  }
+    public function addItem($text, $tag=null, $parentTag=null)
+    {
+        if(is_null($tag)){
+            // Generate tag.
+            $tag = 'item-'.$this->menuCount;
+        }
+        if(is_null($parentTag)){
+            // $this is parent by default.
+            $parentTag = $this->tag;
+        }
 
-  /**
-   * Insert new sub menu at index $tag
-   */
-  public function addSubMenu($text, $tag=null, $parentTag=null)
-  {
-    // find the menu they want to add another menu to
-    $menu = $this->getMenuByTag($parentTag);
+        // Get parent
+        $parent = $this->get($parentTag);
 
-    // If tag isn't given then make one for them
-    if(is_null($tag)){
-      $tag = $menu->getTag() . '-submenu-' . $menu->getSubMenuCount();
+        // Tags must be unique within parent
+        if($parent->has($tag)){
+            throw new Exception('Tags must be unique within parent. Parent: '.$parentTag.', Tag: '.$tag);
+        }
+
+        if(is_null($parent)){
+            throw new Exception('Cannot add item to non-existent parent '.
+                                $parentTag);
+        }
+
+        // Create new item
+        $i = new MenuItem($text, $tag);
+        $parent->add($i);
+
+        $this->itemCount ++;
     }
-    // Create sub menu
-    $subMenu = new SubMenu($text, $tag);
 
-    // Add the menu
-    $menu[$tag] = $subMenu;
-  }
-
-  public function show()
-  {
-    $tpl = array();
-    
-    $tpl['TOP_MENU_TAG']  = $this->tag;
-    $tpl['TOP_MENU_TEXT'] = $this->text;
-
-    foreach($this->container as $item){
-      $tpl['menu_items'][] = array('CONTENT' => $item->show());
+    public function getMenuCount(){
+        return $this->menuCount;
     }
-    
-    return PHPWS_Template::process($tpl, 'othermenu', 'menu.tpl');
-  }
+
+    public function getItemCount(){
+        return $this->itemCount;
+    }
+
 }
 
 ?>
