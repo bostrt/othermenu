@@ -1,14 +1,14 @@
 <?php
 /**
  *
- * OtherMenu is an abstraction upon the composite and leaf.
+ * OtherMenu is a facade for the menu generating.
  * It can be used to generate whole menu.
  * 
  * @author Robert Bost <bostrt at tux dot appstate dot edu>
  */
 
-require_once('MenuComposite.php');
-require_once('MenuItem.php');
+PHPWS_Core::initModClass('othermenu', 'MenuComposite.php');
+PHPWS_Core::initModClass('othermenu', 'MenuItem.php');
 
 class OtherMenu extends MenuComposite
 {
